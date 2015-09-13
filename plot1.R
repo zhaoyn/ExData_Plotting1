@@ -1,0 +1,8 @@
+library(dplyr)
+doc <- read.table("household_power_consumption.txt",sep=";",header = TRUE, na.strings = "?")
+doc <- tbl_df(doc)
+doc <- mutate(doc, Date = as.character(doc$Date))
+doc <- filter(doc, doc$Date %in% c("1/2/2007","2/2/2007"))
+hist(doc$Global_active_power,xlab = "Global Active Power (kilowatts)", main = "Global Active Power",col = "Red")
+dev.copy(png,file = "plot1.png")
+dev.off()
